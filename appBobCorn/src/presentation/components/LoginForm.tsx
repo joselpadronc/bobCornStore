@@ -38,7 +38,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
           <div className="mx-auto mb-4 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
             <User className="w-6 h-6 text-yellow-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">Plataforma de Maíz</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Tienda de Maíz</h1>
           <p className="text-gray-600 mt-2">Ingresa tu nombre de usuario para comenzar</p>
         </div>
 

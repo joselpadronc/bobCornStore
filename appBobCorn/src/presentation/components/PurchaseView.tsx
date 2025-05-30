@@ -60,7 +60,7 @@ export function PurchaseView({ user, onLogout }: PurchaseViewProps) {
       <div className="max-w-2xl mx-auto">
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">¡Hola, {user.username}!</h1>
-          <p className="text-gray-600">Bienvenido a la plataforma de compra de maíz</p>
+          <p className="text-gray-600">Bienvenido a la tienda de maíz</p>
         </div>
 
         <div className="bg-white rounded-lg shadow-lg mb-6">
