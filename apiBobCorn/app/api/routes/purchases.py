@@ -16,4 +16,4 @@ async def sell_corn(request: PurchaseRequest, db: Session = Depends(get_db)):
 @router.get("/{username}/count", summary="Get purchase count by username")
 async def count_purchases(username: str, db: Session = Depends(get_db)):
     count = count_purchases_by_username(db, username)
-    return {"username": username, "purchase_count": count}
+    return {"count": count}

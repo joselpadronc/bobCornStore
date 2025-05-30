@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CropIcon as Corn, ShoppingCart } from "lucide-react"
 import type { User } from "../../core/entities"
 import { useServices } from "../providers/ServiceProvider"
@@ -13,6 +13,12 @@ export function PurchaseView({ user, onLogout }: PurchaseViewProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { purchaseService } = useServices()
   const { success, error } = useNotifications()
+  const [countPurchase, setCountPurchase] = useState(0);
+
+  useEffect(() => {
+    handleGetPurchasesByUsername();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handlePurchase = async () => {
     setIsLoading(true)
@@ -21,6 +27,8 @@ export function PurchaseView({ user, onLogout }: PurchaseViewProps) {
       const response = await purchaseService.createPurchase({
         username: user.username,
       })
+
+      handleGetPurchasesByUsername();
 
       success(
         "¡Compra exitosa!",
@@ -33,6 +41,17 @@ export function PurchaseView({ user, onLogout }: PurchaseViewProps) {
       )
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleGetPurchasesByUsername = async () => {
+    try {
+      const response = await purchaseService.getPurchasesByUsername(user.username)
+
+      setCountPurchase(response.count || countPurchase);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      setCountPurchase(countPurchase || 0);
     }
   }
 
@@ -51,7 +70,7 @@ export function PurchaseView({ user, onLogout }: PurchaseViewProps) {
                 <Corn className="w-6 h-6 text-yellow-600" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold">Cantidad de maiz comprada con exito: 10 unidades</h2>
+                <h2 className="text-xl font-semibold">Cantidad de maiz comprada con exito: {countPurchase} unidades</h2>
               </div>
             </div>
           </div>

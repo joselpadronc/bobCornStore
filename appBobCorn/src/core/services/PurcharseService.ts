@@ -20,4 +20,17 @@ export class PurchaseService {
       throw new Error((error as Error).message || "Error al crear la compra")
     }
   }
+
+  async getPurchasesByUsername(username: string): Promise<{ count: number }> {
+    if (!username || username.trim().length === 0) {
+      throw new Error("Nombre de usuario requerido")
+    }
+
+    try {
+      const response = await this.purchaseRepository.findByUsername(username)
+      return { count: response.count || 0 }
+    } catch (error) {
+      throw new Error((error as Error).message || "Error al obtener las compras")
+    }
+  }
 }

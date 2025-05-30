@@ -1,5 +1,4 @@
 import type { PurchaseRepository } from "../../core/repositories/PurchaseRepository"
-import type { Purchase } from "../../core/entities/Purchase"
 import type { PurchaseRequest, ApiResponse } from "../../types"
 
 export class ApiPurchaseRepository implements PurchaseRepository {
@@ -40,19 +39,19 @@ export class ApiPurchaseRepository implements PurchaseRepository {
     }
   }
 
-  async findByUserId(username: string): Promise<Purchase[]> {
+  async findByUsername(userId: string): Promise<{ count: number }> {
     try {
-      const response = await fetch(`${this.baseUrl}/purchases/user/${username}/`)
+      const response = await fetch(`${this.baseUrl}/purchases/${userId}/count`)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
-      const responseData: ApiResponse<Purchase[]> = await response.json()
-      return  responseData.data ?? []
+      const responseData: ApiResponse = await response.json()
+      return { count: responseData.count ?? 0 }
     } catch (error) {
       console.error("Error fetching user purchases:", error)
-      return []
+      return { count: 0 }
     }
   }
 }

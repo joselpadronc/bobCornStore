@@ -1,10 +1,10 @@
 
 // API Types
-export interface ApiResponse<T = unknown> {
-  data?: T
+export interface ApiResponse {
   status_code?: number
   message?: string
   detail?: string
+  count?: number  
 }
 
 // Configuration Types
