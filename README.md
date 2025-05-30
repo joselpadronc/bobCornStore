@@ -112,7 +112,6 @@ Frontend should now be running at **http://localhost:3000/** 🚀
 ### **Purchases Management**
 - `POST /purchases/` → **Creates a new purchase** _(validates time restrictions)_
 - `GET /purchases/{username}/count` → **Counts total purchases by user**
-- View endpoints in swagger **http://localhost:8000/docs**
 
 ---
 
